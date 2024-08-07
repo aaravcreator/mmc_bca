@@ -16,11 +16,26 @@
 
     <h1>Name: {{name}}</h1>
     <h1>Age: {{age}}</h1>
+
+    {% if age > 18 %}
+    <h1 style="color:blue;">You are Adult , you can vote</h1>
+    {% else %}
+    <h1 style="color:red;">You are Minor, you cant vote</h1>
+    {% endif %}
+
     <h1>Gender: {{gender}}</h1>
 
+    <h1>Hobbies</h1>
 
-    <h1>:::::::TASK::::::</h1>
-    <br>
-    <h1>Modify login view and register view to return login.html and register.html templates</h1>
+    <h1>{{hobbies}}</h1>
+
+    <ul>
+       {% for hobby in hobbies %}
+        <li>{{hobby}}</li>
+
+       {% endfor %}
+       
+    </ul>
+   
 </body>
 </html>

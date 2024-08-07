@@ -15,26 +15,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 
-from django.shortcuts import HttpResponse,render
-from random import randint
-def index_view(request):
-    random_data = randint(1,100)
-
-    data = {
-        "name":"RAM SHARMA",
-        "age":22,
-        "gender":"Male",
-        "random":random_data
-            }
-    # return HttpResponse("<h1>THis is index page</h1>")
-    return render(request,"index.html",data)
-
-
+from djangoproject.views import *
+# from .views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('',index_view),
+    path('',include('myapp.urls')),
     # path('login/',login_view),
 ]
