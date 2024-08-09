@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Student
+from .models import Student,BloodRequest,ContactMessage
 from .forms import StudentForm
 # Create your views here.
 def list_student_view(request):
@@ -48,3 +48,33 @@ def create_student(request):
         'form':form
     }
     return render(request,"create_student.html",data)
+
+def emergency_view(request):
+
+    blood_requests = BloodRequest.objects.filter(is_expired=False,is_verified=True)
+    data = {
+        'blood_requests':blood_requests
+    }
+
+
+
+    return render(request,"emergency.html",data)
+
+def contact_view(request):
+
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        contact_msg = ContactMessage()
+        contact_msg.name = name
+        contact_msg.email = email
+        contact_msg.message = message
+        contact_msg.save()
+        return redirect('/contact/')
+
+
+
+    return render(request,"contact.html")
+
+
